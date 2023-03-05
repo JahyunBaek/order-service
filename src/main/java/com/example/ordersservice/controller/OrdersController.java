@@ -29,6 +29,7 @@ public class OrdersController {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         OrdersDto orderDto = modelMapper.map(orderDetails,OrdersDto.class);
+        orderDto.setUserId(userId);
         OrdersDto returnOrders = ordersService.createOrder(orderDto);
 
         ResponseOrder responseOrder = modelMapper.map(returnOrders,ResponseOrder.class);

@@ -21,8 +21,10 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public OrdersDto createOrder(OrdersDto ordersDto) {
         ordersDto.setOrderId(UUID.randomUUID().toString());
+        ordersDto.setTotalPrice(ordersDto.getQty() * ordersDto.getUnitPrice());
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
         OrdersEntity ordersEntity = modelMapper.map(ordersDto,OrdersEntity.class);
 
         OrdersEntity save = ordersRepository.save(ordersEntity);
